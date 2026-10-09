@@ -96,6 +96,57 @@ python app.py
 
 ---
 
+## Render Deployment Guide (Node.js 24)
+
+### Option A: Render Web Service (Full-Stack Recommended)
+This deploys the full application including all REST API endpoints (`/api/analyze`, `/api/history`, `/api/analytics`, `/api/dataset/csv`), the dual-engine ML/rule pipeline, persistent storage, and built frontend:
+1. In the **Render Dashboard**, click **New +** -> **Web Service**.
+2. Connect your Git repository.
+3. Configure settings:
+   - **Environment**: `Node`
+   - **Node Version**: Set environment variable `NODE_VERSION: 24.0.0` (or `22.14.0`).
+   - **Build Command**: `npm ci && npm run build`
+   - **Start Command**: `npm start`
+4. Add environment variables:
+   - `NODE_ENV`: `production`
+   - `GEMINI_API_KEY`: *(Optional)* Your Gemini API key for Deep AI Threat Forensics.
+5. Click **Deploy Web Service**.
+
+### Option B: Render Static Site (Frontend SPA Only)
+If deploying purely as a static single-page application:
+- **Build Command**: `npm ci && npm run build`
+- **Publish Directory**: `dist`
+- **Node Version**: Set environment variable `NODE_VERSION: 24.0.0`.
+
+### Option C: Optional Python Flask ML Backend on Render
+If you want to host the standalone Python Flask microservice:
+- **Root Directory**: `ml_pipeline`
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `gunicorn -w 2 -b 0.0.0.0:$PORT app:app` (or `python app.py`)
+
+---
+
+## Dependency Conflict Resolution (Root Cause & Fix)
+
+### Issue
+Deployments failed with:
+```
+npm error code ERESOLVE could not resolve
+Found: esbuild@0.25.12
+Could not resolve dependency: peerOptional esbuild ^0.27.0 || ^0.28.0 from vite@8.3.4
+```
+
+### Root Cause
+`package.json` had an outdated, conflicting `"esbuild": "^0.25.0"` explicitly pinned in `devDependencies`. Both `vite@8.3.4` (which requires `esbuild@^0.27.0 || ^0.28.0`) and `tsx@4.23.15` (which requires `esbuild@~0.28.0`) require esbuild `0.28.x`. npm's peer dependency solver rejected the incompatible `0.25.x` version when building in clean CI environments.
+
+### Solution Applied
+1. Removed the conflicting explicit `"esbuild": "^0.25.0"` declaration from root `devDependencies`.
+2. Added `"engines": { "node": ">=22.12.0" }` to `package.json`, ensuring full compatibility with Node.js 24 and Node.js 22 LTS on Render.
+3. Generated a clean, fully consistent `package-lock.json` with 0 vulnerabilities and 0 peer conflicts.
+4. Tested clean installation with `npm ci` and production build with `npm run build`.
+
+---
+
 ## Environment Variables
 
 | Variable | Description | Required |

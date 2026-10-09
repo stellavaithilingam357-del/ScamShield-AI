@@ -1,0 +1,18 @@
+services:
+  # Option 1: Full-Stack Web Service (Hosts API endpoints, persistent storage, and built frontend)
+  - type: web
+    name: scamshield-ai-fullstack
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "24.0.0"
+      - key: NODE_ENV
+        value: "production"
+      - key: PORT
+        value: "10000"
+      - key: GEMINI_API_KEY
+        sync: false # Set in Render Dashboard if using Deep AI Forensics

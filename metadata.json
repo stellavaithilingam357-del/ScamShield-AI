@@ -1,0 +1,6 @@
+{
+  "name": "ScamShield AI",
+  "description": "Explainable AI-Based Job Scam Detection and Risk Assessment Platform with ML Classification, Rule Engine, and Recruiter Verification",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

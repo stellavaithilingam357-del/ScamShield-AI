@@ -1,0 +1,483 @@
+[
+  {
+    "id": "scan_mv0yype7_48eb",
+    "timestamp": "2026-10-09T12:56:28.687Z",
+    "inputTextExcerpt": "Congratulations! You are hired for Data Entry paying $65/hr. Send $250 equipment deposit via Zelle.",
+    "fullText": "Congratulations! You are hired for Data Entry paying $65/hr. Send $250 equipment deposit via Zelle.",
+    "textLength": 99,
+    "formatType": "auto",
+    "riskScore": 97,
+    "riskCategory": "High Risk",
+    "confidenceEstimate": 98,
+    "ruleScore": 95,
+    "mlProbability": 0.999,
+    "mlScore": 100,
+    "detectedIndicators": [
+      {
+        "id": "advance_fee_payment",
+        "name": "Advance Fee / Mandatory Upfront Payment",
+        "category": "Financial",
+        "severity": "CRITICAL",
+        "points": 40,
+        "explanation": "Requests for upfront payments, registration fees, refundable bonds, or equipment deposits are the primary signature of employment advance-fee scams. Real companies supply work tools at their own expense.",
+        "evidencePhrases": [
+          "equipment deposit"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "equipment deposit",
+            "start": 71,
+            "end": 88,
+            "indicatorId": "advance_fee_payment",
+            "indicatorName": "Advance Fee / Mandatory Upfront Payment",
+            "severity": "CRITICAL",
+            "explanation": "Requests for upfront payments, registration fees, refundable bonds, or equipment deposits are the primary signature of employment advance-fee scams. Real companies supply work tools at their own expense."
+          }
+        ]
+      },
+      {
+        "id": "p2p_crypto_channels",
+        "name": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "category": "Financial",
+        "severity": "CRITICAL",
+        "points": 35,
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments.",
+        "evidencePhrases": [
+          "Zelle"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "Zelle",
+            "start": 93,
+            "end": 98,
+            "indicatorId": "p2p_crypto_channels",
+            "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+            "severity": "CRITICAL",
+            "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+          }
+        ]
+      },
+      {
+        "id": "unrealistic_compensation",
+        "name": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+        "category": "Offer Quality",
+        "severity": "HIGH",
+        "points": 20,
+        "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency.",
+        "evidencePhrases": [
+          "$65/hr"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "$65/hr",
+            "start": 53,
+            "end": 59,
+            "indicatorId": "unrealistic_compensation",
+            "indicatorName": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+            "severity": "HIGH",
+            "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency."
+          }
+        ]
+      }
+    ],
+    "highlightSpans": [
+      {
+        "phrase": "$65/hr",
+        "start": 53,
+        "end": 59,
+        "indicatorId": "unrealistic_compensation",
+        "indicatorName": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+        "severity": "HIGH",
+        "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency."
+      },
+      {
+        "phrase": "equipment deposit",
+        "start": 71,
+        "end": 88,
+        "indicatorId": "advance_fee_payment",
+        "indicatorName": "Advance Fee / Mandatory Upfront Payment",
+        "severity": "CRITICAL",
+        "explanation": "Requests for upfront payments, registration fees, refundable bonds, or equipment deposits are the primary signature of employment advance-fee scams. Real companies supply work tools at their own expense."
+      },
+      {
+        "phrase": "Zelle",
+        "start": 93,
+        "end": 98,
+        "indicatorId": "p2p_crypto_channels",
+        "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "severity": "CRITICAL",
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+      }
+    ],
+    "mlFeatures": [
+      {
+        "token": "zelle",
+        "weight": 3.1,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "deposit",
+        "weight": 2.45,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "equipment",
+        "weight": 1.95,
+        "impact": "SUSPICIOUS"
+      }
+    ],
+    "explanationSummary": "Elevated fraud risk detected (Risk Score: 97/100). The submitted text contains 3 critical scam indicators, including Advance Fee / Mandatory Upfront Payment, Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards), Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks. The statistical machine learning classifier identified high-weight scam vocabulary matching common employment fraud templates.",
+    "recommendedActions": [
+      "STOP ALL COMMUNICATION: Cease replies immediately and do not provide any money or confidential identity documents.",
+      "NEVER PAY ADVANCE FEES: Legitimate employers cover all equipment, background check, and training costs.",
+      "SECURE ACCOUNTS: If you already provided passwords, bank account numbers, or OTP codes, immediately notify your financial institution and change affected passwords.",
+      "REPORT THE SCAM: File a report with the Federal Trade Commission (reportfraud.ftc.gov) or FBI Internet Crime Complaint Center (ic3.gov)."
+    ],
+    "disclaimer": "ScamShield AI risk scores and classifications are algorithmic estimates based on pattern analysis and machine learning, not definitive proof of fraud or legitimacy. Always independently verify offers."
+  },
+  {
+    "id": "scan_mv0yykvz_58ra",
+    "timestamp": "2026-10-09T12:56:22.847Z",
+    "inputTextExcerpt": "Congratulations! You have been selected for an online Data Entry Specialist position paying $65/hour. To begin onboarding and receive your Apple MacBook and company phone, please w...",
+    "fullText": "Congratulations! You have been selected for an online Data Entry Specialist position paying $65/hour. To begin onboarding and receive your Apple MacBook and company phone, please wire a refundable equipment insurance deposit of $250 via Zelle to our HR logistics agent.",
+    "textLength": 269,
+    "formatType": "email",
+    "riskScore": 75,
+    "riskCategory": "High Risk",
+    "confidenceEstimate": 98,
+    "ruleScore": 55,
+    "mlProbability": 1,
+    "mlScore": 100,
+    "detectedIndicators": [
+      {
+        "id": "p2p_crypto_channels",
+        "name": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "category": "Financial",
+        "severity": "CRITICAL",
+        "points": 35,
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments.",
+        "evidencePhrases": [
+          "Zelle"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "Zelle",
+            "start": 237,
+            "end": 242,
+            "indicatorId": "p2p_crypto_channels",
+            "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+            "severity": "CRITICAL",
+            "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+          }
+        ]
+      },
+      {
+        "id": "unrealistic_compensation",
+        "name": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+        "category": "Offer Quality",
+        "severity": "HIGH",
+        "points": 20,
+        "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency.",
+        "evidencePhrases": [
+          "$65/hour"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "$65/hour",
+            "start": 92,
+            "end": 100,
+            "indicatorId": "unrealistic_compensation",
+            "indicatorName": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+            "severity": "HIGH",
+            "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency."
+          }
+        ]
+      }
+    ],
+    "highlightSpans": [
+      {
+        "phrase": "$65/hour",
+        "start": 92,
+        "end": 100,
+        "indicatorId": "unrealistic_compensation",
+        "indicatorName": "Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks",
+        "severity": "HIGH",
+        "explanation": "Offers promising $50-$150/hr for simple data entry, copy-pasting, typing, or hotel rating tasks are designed to exploit financial urgency."
+      },
+      {
+        "phrase": "Zelle",
+        "start": 237,
+        "end": 242,
+        "indicatorId": "p2p_crypto_channels",
+        "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "severity": "CRITICAL",
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+      }
+    ],
+    "mlFeatures": [
+      {
+        "token": "zelle",
+        "weight": 3.1,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "wire",
+        "weight": 2.85,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "deposit",
+        "weight": 2.45,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "refundable",
+        "weight": 2.3,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "equipment",
+        "weight": 1.95,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "hour",
+        "weight": 0.85,
+        "impact": "SUSPICIOUS"
+      }
+    ],
+    "explanationSummary": "Elevated fraud risk detected (Risk Score: 75/100). The submitted text contains 2 critical scam indicators, including Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards), Unrealistic Salary / Exorbitant Pay for Low-Skill Tasks. The statistical machine learning classifier identified high-weight scam vocabulary matching common employment fraud templates.",
+    "recommendedActions": [
+      "STOP ALL COMMUNICATION: Cease replies immediately and do not provide any money or confidential identity documents.",
+      "NEVER PAY ADVANCE FEES: Legitimate employers cover all equipment, background check, and training costs.",
+      "SECURE ACCOUNTS: If you already provided passwords, bank account numbers, or OTP codes, immediately notify your financial institution and change affected passwords.",
+      "REPORT THE SCAM: File a report with the Federal Trade Commission (reportfraud.ftc.gov) or FBI Internet Crime Complaint Center (ic3.gov)."
+    ],
+    "disclaimer": "ScamShield AI risk scores and classifications are algorithmic estimates based on pattern analysis and machine learning, not definitive proof of fraud or legitimacy. Always independently verify offers.",
+    "verificationReport": {
+      "companyName": "Apple Inc.",
+      "officialWebsite": "https://apple.com",
+      "recruiterEmail": "apple.hr.logistics@gmail.com",
+      "checks": [
+        {
+          "item": "Recruiter Email Domain",
+          "status": "DISCREPANCY",
+          "detail": "Recruiter is using a free commercial webmail domain (@gmail.com) rather than an authenticated corporate domain."
+        },
+        {
+          "item": "Website Registration Status",
+          "status": "UNVERIFIED",
+          "detail": "WHOIS domain registration age not verified via live registry."
+        },
+        {
+          "item": "Safe Manual Verification Steps",
+          "status": "INFO",
+          "detail": "1. Cross-reference recruiter name on LinkedIn under company employee directory. 2. Call company headquarters switchboard directly. 3. Search exact Job Requisition ID on company official /careers portal."
+        }
+      ],
+      "summary": "Discrepancy detected during verification checks. Exercise heightened caution."
+    }
+  },
+  {
+    "id": "scan_mv0yykw2_v5ug",
+    "timestamp": "2026-10-09T12:56:22.850Z",
+    "inputTextExcerpt": "We reviewed your application for the Software Engineer role at Stripe. We would like to invite you for a 45-minute technical phone screen next Tuesday. Please find our engineering ...",
+    "fullText": "We reviewed your application for the Software Engineer role at Stripe. We would like to invite you for a 45-minute technical phone screen next Tuesday. Please find our engineering interview guide attached and select a time on our official portal at careers.stripe.com.",
+    "textLength": 268,
+    "formatType": "job_post",
+    "riskScore": 0,
+    "riskCategory": "Low Risk",
+    "confidenceEstimate": 98,
+    "ruleScore": 0,
+    "mlProbability": 0.001,
+    "mlScore": 0,
+    "detectedIndicators": [],
+    "highlightSpans": [],
+    "mlFeatures": [
+      {
+        "token": "interview",
+        "weight": -1.85,
+        "impact": "BENIGN"
+      },
+      {
+        "token": "portal",
+        "weight": -1.5,
+        "impact": "BENIGN"
+      },
+      {
+        "token": "engineering",
+        "weight": -1.4,
+        "impact": "BENIGN"
+      },
+      {
+        "token": "attached",
+        "weight": -1.2,
+        "impact": "BENIGN"
+      },
+      {
+        "token": "application",
+        "weight": -1.05,
+        "impact": "BENIGN"
+      }
+    ],
+    "explanationSummary": "Low risk profile (Risk Score: 0/100). No advance-fee demands, credential requests, or known fraudulent payment patterns were identified. The message vocabulary aligns with standard professional recruitment procedures.",
+    "recommendedActions": [
+      "PROCEED WITH STANDARD DILIGENCE: Review compensation terms and ensure all communications originate from the organization's official email domain.",
+      "VERIFY OFFER DETAILS: Ensure formal employment contracts are executed through an established secure document portal."
+    ],
+    "disclaimer": "ScamShield AI risk scores and classifications are algorithmic estimates based on pattern analysis and machine learning, not definitive proof of fraud or legitimacy. Always independently verify offers.",
+    "verificationReport": {
+      "companyName": "Stripe",
+      "officialWebsite": "https://stripe.com",
+      "recruiterEmail": "talent@stripe.com",
+      "jobUrl": "https://careers.stripe.com/jobs/se-infra-891",
+      "checks": [
+        {
+          "item": "Domain Alignment",
+          "status": "MATCH",
+          "detail": "Email domain (@stripe.com) matches the company's official web domain (stripe.com)."
+        },
+        {
+          "item": "Website Registration Status",
+          "status": "UNVERIFIED",
+          "detail": "WHOIS domain registration age not verified via live registry."
+        },
+        {
+          "item": "Application Gateway",
+          "status": "UNVERIFIED",
+          "detail": "Third-party or custom URL provided. Not checked against official careers database."
+        },
+        {
+          "item": "Safe Manual Verification Steps",
+          "status": "INFO",
+          "detail": "1. Cross-reference recruiter name on LinkedIn under company employee directory. 2. Call company headquarters switchboard directly. 3. Search exact Job Requisition ID on company official /careers portal."
+        }
+      ],
+      "summary": "Manual verification required. No live official registrar query was performed."
+    }
+  },
+  {
+    "id": "scan_mv0yykw2_pqm0",
+    "timestamp": "2026-10-09T12:56:22.850Z",
+    "inputTextExcerpt": "Work from Home Assistant position! We will send you an official cashier's check of $4,500. You will deposit the check into your personal bank account, keep $500 as your weekly adva...",
+    "fullText": "Work from Home Assistant position! We will send you an official cashier's check of $4,500. You will deposit the check into your personal bank account, keep $500 as your weekly advance salary, and transfer the remaining $4,000 via Bitcoin ATM to our software vendor.",
+    "textLength": 265,
+    "formatType": "sms_whatsapp",
+    "riskScore": 80,
+    "riskCategory": "High Risk",
+    "confidenceEstimate": 98,
+    "ruleScore": 70,
+    "mlProbability": 1,
+    "mlScore": 100,
+    "detectedIndicators": [
+      {
+        "id": "p2p_crypto_channels",
+        "name": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "category": "Financial",
+        "severity": "CRITICAL",
+        "points": 35,
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments.",
+        "evidencePhrases": [
+          "Bitcoin"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "Bitcoin",
+            "start": 230,
+            "end": 237,
+            "indicatorId": "p2p_crypto_channels",
+            "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+            "severity": "CRITICAL",
+            "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+          }
+        ]
+      },
+      {
+        "id": "fake_check_overpayment",
+        "name": "Fake Check & Overpayment Scheme",
+        "category": "Financial",
+        "severity": "CRITICAL",
+        "points": 35,
+        "explanation": "The employer sends an upfront counterfeit check, asks you to deposit it, and insists you wire or spend a portion for 'supplies'. The bank may provisionally clear the funds, but the fake check bounces days later, leaving you personally liable for the full balance.",
+        "evidencePhrases": [
+          "cashier's check of $4",
+          "deposit the check into your personal bank account, keep $500 as your weekly advance salary, and transfer"
+        ],
+        "matchedSpans": [
+          {
+            "phrase": "cashier's check of $4",
+            "start": 64,
+            "end": 85,
+            "indicatorId": "fake_check_overpayment",
+            "indicatorName": "Fake Check & Overpayment Scheme",
+            "severity": "CRITICAL",
+            "explanation": "The employer sends an upfront counterfeit check, asks you to deposit it, and insists you wire or spend a portion for 'supplies'. The bank may provisionally clear the funds, but the fake check bounces days later, leaving you personally liable for the full balance."
+          },
+          {
+            "phrase": "deposit the check into your personal bank account, keep $500 as your weekly advance salary, and transfer",
+            "start": 100,
+            "end": 204,
+            "indicatorId": "fake_check_overpayment",
+            "indicatorName": "Fake Check & Overpayment Scheme",
+            "severity": "CRITICAL",
+            "explanation": "The employer sends an upfront counterfeit check, asks you to deposit it, and insists you wire or spend a portion for 'supplies'. The bank may provisionally clear the funds, but the fake check bounces days later, leaving you personally liable for the full balance."
+          }
+        ]
+      }
+    ],
+    "highlightSpans": [
+      {
+        "phrase": "cashier's check of $4",
+        "start": 64,
+        "end": 85,
+        "indicatorId": "fake_check_overpayment",
+        "indicatorName": "Fake Check & Overpayment Scheme",
+        "severity": "CRITICAL",
+        "explanation": "The employer sends an upfront counterfeit check, asks you to deposit it, and insists you wire or spend a portion for 'supplies'. The bank may provisionally clear the funds, but the fake check bounces days later, leaving you personally liable for the full balance."
+      },
+      {
+        "phrase": "deposit the check into your personal bank account, keep $500 as your weekly advance salary, and transfer",
+        "start": 100,
+        "end": 204,
+        "indicatorId": "fake_check_overpayment",
+        "indicatorName": "Fake Check & Overpayment Scheme",
+        "severity": "CRITICAL",
+        "explanation": "The employer sends an upfront counterfeit check, asks you to deposit it, and insists you wire or spend a portion for 'supplies'. The bank may provisionally clear the funds, but the fake check bounces days later, leaving you personally liable for the full balance."
+      },
+      {
+        "phrase": "Bitcoin",
+        "start": 230,
+        "end": 237,
+        "indicatorId": "p2p_crypto_channels",
+        "indicatorName": "Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards)",
+        "severity": "CRITICAL",
+        "explanation": "Scammers instruct job applicants to transact using irreversible methods like Zelle, Cash App, crypto, or retail gift cards because these transactions cannot be disputed or recalled through banking fraud departments."
+      }
+    ],
+    "mlFeatures": [
+      {
+        "token": "cashier check",
+        "weight": 3.25,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "bitcoin",
+        "weight": 2.75,
+        "impact": "SUSPICIOUS"
+      },
+      {
+        "token": "deposit",
+        "weight": 2.45,
+        "impact": "SUSPICIOUS"
+      }
+    ],
+    "explanationSummary": "Elevated fraud risk detected (Risk Score: 80/100). The submitted text contains 2 critical scam indicators, including Irreversible Payment Channels (Zelle, Cash App, Crypto, Gift Cards), Fake Check & Overpayment Scheme. The statistical machine learning classifier identified high-weight scam vocabulary matching common employment fraud templates.",
+    "recommendedActions": [
+      "STOP ALL COMMUNICATION: Cease replies immediately and do not provide any money or confidential identity documents.",
+      "NEVER PAY ADVANCE FEES: Legitimate employers cover all equipment, background check, and training costs.",
+      "SECURE ACCOUNTS: If you already provided passwords, bank account numbers, or OTP codes, immediately notify your financial institution and change affected passwords.",
+      "REPORT THE SCAM: File a report with the Federal Trade Commission (reportfraud.ftc.gov) or FBI Internet Crime Complaint Center (ic3.gov)."
+    ],
+    "disclaimer": "ScamShield AI risk scores and classifications are algorithmic estimates based on pattern analysis and machine learning, not definitive proof of fraud or legitimacy. Always independently verify offers."
+  }
+]

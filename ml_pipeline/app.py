@@ -202,21 +202,165 @@ def compute_ml_prediction(text: str):
 
     return prob, sorted(influential_tokens, key=lambda x: abs(x["weight"]), reverse=True)[:10]
 
+ALLOWED_EXTENSIONS = {'pdf', 'docx', 'txt', 'csv'}
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+
+def extract_text_from_file_object(file_storage):
+    """
+    Extracts readable text from uploaded PDF, DOCX, TXT, or CSV files.
+    - PDF: PyMuPDF (fitz)
+    - DOCX: python-docx
+    - TXT: UTF-8 with robust fallback
+    - CSV: pandas
+    """
+    if not file_storage or not file_storage.filename:
+        raise ValueError("No file provided or file has no name.")
+
+    filename = file_storage.filename
+    ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else ''
+
+    if ext not in ALLOWED_EXTENSIONS:
+        raise ValueError(f"Unsupported file format '.{ext}'. Please upload a PDF, DOCX, TXT, or CSV file.")
+
+    content_bytes = file_storage.read()
+
+    if not content_bytes or len(content_bytes) == 0:
+        raise ValueError("The uploaded file is empty.")
+
+    if len(content_bytes) > MAX_FILE_SIZE:
+        raise ValueError("File exceeds 10MB limit. Please upload a smaller file.")
+
+    extracted_text = ""
+
+    # 1. PDF Extraction using PyMuPDF (fitz)
+    if ext == 'pdf':
+        try:
+            import fitz
+            doc = fitz.open(stream=content_bytes, filetype="pdf")
+            if doc.is_encrypted:
+                raise ValueError("Encrypted or password-protected PDF files are not supported.")
+            pages = []
+            for page in doc:
+                text = page.get_text()
+                if text:
+                    pages.append(text)
+            doc.close()
+            extracted_text = "\n\n".join(pages).strip()
+        except ImportError:
+            raise RuntimeError("PyMuPDF (fitz) is not installed on the server.")
+        except Exception as e:
+            raise ValueError(f"Corrupted or unreadable PDF file: {str(e)}")
+
+    # 2. DOCX Extraction using python-docx
+    elif ext == 'docx':
+        try:
+            import docx
+            import io
+            doc = docx.Document(io.BytesIO(content_bytes))
+            paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+            for table in doc.tables:
+                for row in table.rows:
+                    for cell in row.cells:
+                        if cell.text.strip():
+                            paragraphs.append(cell.text.strip())
+            extracted_text = "\n\n".join(paragraphs).strip()
+        except ImportError:
+            raise RuntimeError("python-docx is not installed on the server.")
+        except Exception as e:
+            raise ValueError(f"Corrupted or unreadable DOCX file: {str(e)}")
+
+    # 3. TXT Extraction using proper UTF-8 encoding with error handling
+    elif ext == 'txt':
+        try:
+            extracted_text = content_bytes.decode('utf-8')
+        except UnicodeDecodeError:
+            try:
+                extracted_text = content_bytes.decode('latin-1')
+            except Exception as e:
+                raise ValueError(f"Failed to decode TXT file with valid encoding: {str(e)}")
+        extracted_text = extracted_text.strip()
+
+    # 4. CSV Extraction using pandas
+    elif ext == 'csv':
+        try:
+            import pandas as pd
+            import io
+            try:
+                df = pd.read_csv(io.BytesIO(content_bytes), encoding='utf-8')
+            except UnicodeDecodeError:
+                df = pd.read_csv(io.BytesIO(content_bytes), encoding='latin-1')
+
+            if df.empty:
+                raise ValueError("The uploaded CSV file contains no data rows.")
+
+            # Identify candidate text columns
+            text_cols = [c for c in df.columns if any(k in str(c).lower() for k in ['message', 'text', 'desc', 'content', 'job', 'body', 'post', 'offer'])]
+            if text_cols:
+                extracted_text = "\n\n".join(df[text_cols[0]].dropna().astype(str).tolist())
+            else:
+                extracted_text = "\n\n".join(df.astype(str).agg(' '.join, axis=1).tolist())
+            extracted_text = extracted_text.strip()
+        except ImportError:
+            raise RuntimeError("pandas is not installed on the server.")
+        except Exception as e:
+            raise ValueError(f"Corrupted or invalid CSV file: {str(e)}")
+
+    if not extracted_text or not extracted_text.strip():
+        raise ValueError("The uploaded file contains no readable text.")
+
+    return extracted_text, filename, ext
+
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
         "status": "healthy",
         "service": "ScamShield AI Python Backend",
-        "model_loaded": model_data is not None
+        "model_loaded": model_data is not None,
+        "supported_file_types": ["pdf", "docx", "txt", "csv"]
     })
+
+@app.route("/api/extract-text", methods=["POST"])
+@app.route("/api/upload", methods=["POST"])
+def extract_text_route():
+    file = request.files.get("file") or request.files.get("document")
+    if not file:
+        return jsonify({"error": "No file uploaded. Please include a file in the 'file' field."}), 400
+
+    try:
+        text, filename, ext = extract_text_from_file_object(file)
+        return jsonify({
+            "text": text,
+            "filename": filename,
+            "file_type": ext,
+            "character_count": len(text)
+        })
+    except ValueError as ve:
+        return jsonify({"error": str(ve)}), 400
+    except Exception as e:
+        return jsonify({"error": f"Server error processing file: {str(e)}"}), 500
 
 @app.route("/api/analyze", methods=["POST"])
 def analyze():
-    payload = request.get_json(force=True, silent=True) or {}
-    text = payload.get("text", "").strip()
+    text = ""
+    filename = None
+
+    # Check if file was sent as multipart/form-data
+    if request.files and ("file" in request.files or "document" in request.files):
+        file = request.files.get("file") or request.files.get("document")
+        try:
+            text, filename, _ = extract_text_from_file_object(file)
+        except ValueError as ve:
+            return jsonify({"error": str(ve)}), 400
+        except Exception as e:
+            return jsonify({"error": f"Failed to extract text from uploaded file: {str(e)}"}), 500
+    elif request.is_json:
+        payload = request.get_json(silent=True) or {}
+        text = payload.get("text", "").strip()
+    else:
+        text = (request.form.get("text") or "").strip()
 
     if not text:
-        return jsonify({"error": "Empty text provided"}), 400
+        return jsonify({"error": "Empty text provided or uploaded file contained no readable text."}), 400
     if len(text) > 50000:
         return jsonify({"error": "Text exceeds maximum 50,000 characters limit"}), 400
 
@@ -228,7 +372,6 @@ def analyze():
     ml_score = ml_prob * 100
 
     # 3. Transparent Combined Risk Score (Weighted blend capped at 100)
-    # Rules provide concrete structural evidence, ML provides contextual semantic classification
     combined_score = min(100, round((rule_points * 0.6) + (ml_score * 0.4)))
     if rule_points >= 50:
         combined_score = max(combined_score, 75)
@@ -240,7 +383,7 @@ def analyze():
     else:
         category = "High Risk"
 
-    return jsonify({
+    response_data = {
         "risk_score": combined_score,
         "risk_category": category,
         "confidence_estimate": round(max(ml_prob, 1.0 - ml_prob) * 100, 1),
@@ -250,7 +393,14 @@ def analyze():
             "influential_features": influential_tokens
         },
         "disclaimer": "This score is an estimate based on pattern matching and statistical ML classification, not definitive proof of fraud."
-    })
+    }
+
+    if filename:
+        response_data["filename"] = filename
+        response_data["extracted_text_preview"] = text[:300] + "..." if len(text) > 300 else text
+
+    return jsonify(response_data)
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
